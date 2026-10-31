@@ -2,7 +2,7 @@
 
 **Goal:** define exactly what we are building before writing code.
 **Deliverable:** finalised requirements, user flows, MVP scope, and test scenarios.
-**Status:** drafted. Decisions in section 10 still need confirming.
+**Status:** drafted. Decisions D1, D3–D5 in section 10 still need confirming; D2 (Ollama) is decided.
 
 **Contents:** 1. Scope · 2. Workflow · 3. Extension UI · 4. File-change handling · 5. Risk signals · 6. Findings · 7. Data model · 8. Test scenarios · 9. Success metrics · 10. Decisions · 11. Exit checklist · Appendix: finding JSON schema
 
@@ -258,11 +258,18 @@ Status stays **Proposed** until the project owner confirms. Update this table wh
 | # | Decision | Proposed default | Status |
 |---|---|---|---|
 | D1 | GitHub App, teams, release simulation move to MVP+ | Yes | Proposed |
-| D2 | LLM provider and model for the backend | TBD | Open |
+| D2 | LLM provider and model for the backend | Ollama (local). Installed: `qwen2.5:3b` (chat), `nomic-embed-text` (embeddings). Model choice to be revisited after evaluation | Decided (provider); model provisional |
 | D3 | First test runner(s) | Vitest and Jest | Proposed |
 | D4 | Auth in MVP | Dev API key only; real login with the web dashboard | Proposed |
 | D5 | Sample repo | Write our own so bugs are seeded and known | Proposed |
 | D6 | Repo layout | Monorepo: `codexa/{docs,vscode-extension,backend,web}` | Decided |
+
+**Implications of using Ollama**
+- The backend calls Ollama over HTTP (default `http://localhost:11434`); no cloud API key is needed for development.
+- Structured findings use Ollama's JSON-schema `format` output, validated against the appendix schema, with a retry on invalid output.
+- `qwen2.5:3b` is small. Expect weaker reasoning and unreliable tool calling, so the investigator leans on the deterministic signals and bundled evidence rather than free-form tool use. Evaluate larger local models later using the section 8 scenarios.
+- Embeddings for the small RAG version use `nomic-embed-text` with pgvector.
+- Code stays on the developer's machine, which supports the local-first goal. A cloud model remains a later option behind the same backend interface.
 
 ---
 
@@ -275,7 +282,8 @@ Status stays **Proposed** until the project owner confirms. Update this table wh
 - [x] Finding schema written
 - [x] Data model drafted
 - [x] Test scenarios drafted
-- [ ] Decisions D1–D5 confirmed
+- [x] D2 LLM provider decided (Ollama)
+- [ ] Decisions D1, D3–D5 confirmed
 - [ ] Extension UI wireframes (sketches)
 - [ ] Sample repo created (Phase 2)
 

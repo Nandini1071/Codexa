@@ -7,6 +7,7 @@ Docs are written one file per phase so progress and decisions stay traceable.
 | Phase | Title | Status |
 |---|---|---|
 | [1](phase-1.md) | Planning and requirement finalisation | Drafted, decisions pending |
+| [2](phase-2.md) | Project setup and architecture | Planned |
 
 ## Repo layout
 
