@@ -1,0 +1,21 @@
+# OS / editors
+.DS_Store
+
+# Node
+node_modules/
+dist/
+out/
+.vscode-test/
+*.vsix
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
